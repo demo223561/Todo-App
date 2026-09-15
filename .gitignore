@@ -1,0 +1,17 @@
+# 環境變數（包含敏感資訊，不能進 git）
+.env
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+
+# Node
+node_modules
+dist
+
+# K8s Secret
+k8s/todo-secrets.yaml
+
+# OS
+.DS_Store

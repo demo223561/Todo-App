@@ -1,0 +1,19 @@
+server {
+    listen 80;
+    server_name localhost;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # API 請求轉發給後端
+    # API_HOST / API_PORT 由環境變數注入：
+    #   - docker compose: API_HOST=api, API_PORT=8000
+    #   - k8s: API_HOST=todo-api-service, API_PORT=80（image 內建預設值）
+    location /api/ {
+        proxy_pass http://${API_HOST}:${API_PORT}/;
+    }
+
+    # React Router 支援
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
